@@ -1,0 +1,11 @@
+{
+  "en": {
+    "welcome": "Welcome to Calculator!",
+    "invalidNum": "Not a valid number; try again",
+    "first": "First number:",
+    "second": "Second number:",
+    "selectOperation": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide:",
+    "invalidOption": "Not a valid option; try again",
+    "anotherCalc": "Perform another calculation? y / n"
+  }
+}

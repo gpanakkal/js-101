@@ -3,6 +3,9 @@
  */
 const rl = require('readline-sync');
 
+const LANGUAGE = 'en';
+const MESSAGES = require('./calculator_messages.json')[LANGUAGE];
+
 const formattedPrompt = (message) => console.log(`=> ${message}`);
 const validNumber = (numberStr) => !(numberStr.trimStart() === '' || Number.isNaN(Number(numberStr)));
 
@@ -10,7 +13,7 @@ const getValidNumberInput = (prompt) => {
   formattedPrompt(prompt);
   let input = rl.question().replace(/,/, '');
   while (!validNumber(input)) {
-    console.log('Not a valid number; try again');
+    console.log(MESSAGES.invalidNum);
     input = rl.question().replace(/,/, '');
   }
   return Number(input);
@@ -23,24 +26,24 @@ const operationDict = {
   4: (x, y) => x / y,
 };
 
-console.log('Welcome to Calculator!');
+console.log(MESSAGES.welcome);
 
 function main() {
-  const x = getValidNumberInput('First number:');
-  const y = getValidNumberInput('Second number:');
+  const x = getValidNumberInput(MESSAGES.first);
+  const y = getValidNumberInput(MESSAGES.second);
 
-  formattedPrompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide:');
+  formattedPrompt(MESSAGES.selectOperation);
   let operation = rl.question();
   while (operationDict[operation] === undefined) {
-    console.log('Not a valid option; try again');
+    console.log(MESSAGES.invalidOption);
     operation = rl.question();
   }
 
   console.log(operationDict[operation](x, y));
-  formattedPrompt('Perform another calculation? y / n');
+  formattedPrompt(MESSAGES.anotherCalc);
   let repeat = rl.question();
   while (repeat !== 'y' && repeat !== 'n') {
-    console.log('Not a valid option; type y or n');
+    console.log(MESSAGES.invalidOption);
     repeat = rl.question();
   }
   if (repeat === 'y') main();
